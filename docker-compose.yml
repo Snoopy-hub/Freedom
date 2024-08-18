@@ -1,0 +1,18 @@
+networks:
+  srcds:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: 1
+
+services:
+  l4d2:
+    container_name: l4d2_runtime
+    image: l4d2
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "33333:33333/tcp"
+      - "33333:33333/udp"
+    networks:
+      - srcds
